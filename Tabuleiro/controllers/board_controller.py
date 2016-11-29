@@ -12,7 +12,6 @@ class BoardController:
 
   def init_game(self):
 
-
     self.white_player = self._select_player(Board.WHITE)
     self.black_player = self._select_player(Board.BLACK)
 
