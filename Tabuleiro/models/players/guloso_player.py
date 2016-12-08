@@ -4,16 +4,16 @@ class Guloso:
         self.color = color
 
     def play(self, board):
-        return self.getNextMove(board.valid_moves(self.color))
+        return self.getNextMove(board.valid_moves(self.color), board)
 
     def getNextMove(self, moves, board):
         melhorMovimento = None
         melhorPontuacao = -1
         for move in moves:
             simulacao_jogada = board.get_clone()
-            simulacao_jogada.play(self, move, color)
+            simulacao_jogada.play(move, self.color)
             [white, black] = simulacao_jogada.score()
-            if color == board.WHITE:
+            if self.color == board.WHITE:
                 pontuacao_temp = white
             else:
                 pontuacao_temp = black
