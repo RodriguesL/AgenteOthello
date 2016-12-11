@@ -13,26 +13,24 @@ class Minimax:
 
     def minimax_corte(self, board, depth, color, parent_alpha, parent_beta, max_gamer):
         def avaliacao(board, color ):
-            SQUARE_WEIGHTS = [
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 120, -20, 20, 5, 5, 20, -20, 120, 0],
-                [0, -20, -40, -5, -5, -5, -5, -40, -20, 0],
-                [0, 20, -5, 15, 3, 3, 15, -5, 20, 0],
-                [0, 5, -5, 3, 3, 3, 3, -5, 5, 0],
-                [0, 5, -5, 3, 3, 3, 3, -5, 5, 0],
-                [0, 20, -5, 15, 3, 3, 15, -5, 20, 0],
-                [0, -20, -40, -5, -5, -5, -5, -40, -20, 0],
-                [0, 120, -20, 20, 5, 5, 20, -20, 120, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            peso = [
+                [120, -20, 20, 5, 5, 20, -20, 120],
+                [-20, -40, -5, -5, -5, -5, -40, -20],
+                [20, -5, 15, 3, 3, 15, -5, 20],
+                [5, -5, 3, 3, 3, 3, -5, 5],
+                [5, -5, 3, 3, 3, 3, -5, 5],
+                [20, -5, 15, 3, 3, 15, -5, 20],
+                [-20, -40, -5, -5, -5, -5, -40, -20],
+                [120, -20, 20, 5, 5, 20, -20, 120],
             ]
             estabilidade = 0
             estabilidade_oponente = 0
             for i in range(1,9):
                 for j in range(1,9):
                     if board.board[i][j] == color:
-                        estabilidade += SQUARE_WEIGHTS[i-1][j-1]
+                        estabilidade += peso[i-1][j-1]
                     elif board.board[i][j] == board._opponent(color):
-                        estabilidade_oponente += SQUARE_WEIGHTS[i-1][j-1]
+                        estabilidade_oponente += peso[i-1][j-1]
 
             return estabilidade - estabilidade_oponente
 
