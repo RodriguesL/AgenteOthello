@@ -11,9 +11,8 @@ class Minimax:
         self.minimax_corte(board, self.max_depth, self.color, float('-inf'), float('inf'), True)
         return self.jogada
 
-    def minimax_corte(self, board, depth, color, parent_alpha, parent_beta, max_player):
+    def minimax_corte(self, board, depth, color, parent_alpha, parent_beta, max_gamer):
         def avaliacao(board, color ):
-            cor_oponente = board._opponent(color)
             peso = [
                 [120, -20, 20, 5, 5, 20, -20, 120],
                 [-20, -40, -5, -5, -5, -5, -40, -20],
@@ -33,26 +32,7 @@ class Minimax:
                     elif board.board[i][j] == board._opponent(color):
                         estabilidade_oponente += peso[i-1][j-1]
 
-            estabilidade_total = estabilidade - estabilidade_oponente
-
-            qtd_mov = len(board.valid_moves(color))
-            qtd_mov_oponente = len(board.valid_moves(cor_oponente))
-            if qtd_mov + qtd_mov_oponente != 0:
-                mobilidade = (qtd_mov - qtd_mov_oponente)
-            else:
-                mobilidade = 0
-
-            [white, black] = board.score()
-            if color == board.WHITE:
-                score = white
-                score_oponente = black
-            else:
-                score = black
-                score_oponente = white
-            
-            paridade = (score - score_oponente)
-
-            return estabilidade_total + mobilidade + paridade
+            return estabilidade - estabilidade_oponente
 
         moves = board.valid_moves(color)
         pontuacao = None
@@ -66,8 +46,8 @@ class Minimax:
         for move in moves:
             jogada_simulacao = board.get_clone()
             jogada_simulacao.play(move, color)
-            melhorPontuacao = self.minimax_corte(jogada_simulacao, depth - 1, oponente, alpha, beta, not(max_player))
-            if max_player:
+            melhorPontuacao = self.minimax_corte(jogada_simulacao, depth - 1, oponente, alpha, beta, not(max_gamer))
+            if max_gamer:
                 if melhorPontuacao > alpha:
                     alpha = melhorPontuacao
                     melhorJogada = move
