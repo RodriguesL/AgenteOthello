@@ -52,7 +52,7 @@ class Minimax:
             
             paridade = (score - score_oponente)
 
-            return (60*estabilidade_total + 35*mobilidade + 5*paridade)/100
+            return (60*estabilidade_total + 35*mobilidade + 5*paridade)
 
         moves = board.valid_moves(color)
         pontuacao = None
